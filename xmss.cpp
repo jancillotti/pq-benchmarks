@@ -1,32 +1,15 @@
 #include <botan/auto_rng.h>
 #include <botan/pubkey.h>
-#include <botan/secmem.h>
 #include <botan/xmss.h>
 
 #include <chrono>
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include <numeric>
-#include <cmath>
 
 #include "util.h"
 
 #define ITERATIONS 1000
-
-void get_stddev_sign(unsigned long long &stddev_sign_time) {
-	double sum = std::accumulate(sign_times.begin(), sign_times.end(), 0.0);
-	double mean = sum / sign_times.size();
-	double squared_sum = std::inner_product(sign_times.begin(), sign_times.end(), sign_times.begin(), 0.0);
-	stddev_sign_time = std::sqrt(squared_sum / sign_times.size() - mean * mean);
-}
-
-void get_stddev_verify(unsigned long long &stddev_verify_time) {
-	double sum = std::accumulate(verify_times.begin(), verify_times.end(), 0.0);
-	double mean = sum / verify_times.size();
-	double squared_sum = std::inner_product(verify_times.begin(), verify_times.end(), verify_times.begin(), 0.0);
-	stddev_verify_time = std::sqrt(squared_sum / verify_times.size() - mean * mean);
-}
 
 int sign_and_verify() {
    // Create a random number generator used for key generation.
@@ -76,24 +59,14 @@ int main() {
 
 	get_average_sign_time(average_sign_time, sign_times);
 	get_average_verify_time(average_verify_time, verify_times);
-	get_stddev_sign(stddev_sign_time);
-	get_stddev_verify(stddev_verify_time);
-	
-	std::cout << "Average sign time (ns):\t\t" << average_sign_time << std::endl;
-	std::cout << "Std. sign time (ns):\t\t" << stddev_sign_time << std::endl << std::endl;
-	
-	std::cout << "Average verify time (ns):\t" << average_verify_time << std::endl;
-	std::cout << "Std. verify time (ns):\t\t" << stddev_verify_time << std::endl;
+	get_stddev_sign(stddev_sign_time, sign_times);
+	get_stddev_verify(stddev_verify_time, verify_times);
 
-	
-	std::ofstream outfile;
-	outfile.open("xmss_results.txt");
-	outfile << "Average sign time (ns):\t\t" << average_sign_time << std::endl;
-	outfile << "Std. sign time (ns):\t\t" << stddev_sign_time << std::endl << std::endl;
-	
-	outfile << "Average verify time (ns):\t" << average_verify_time << std::endl;
-	outfile << "Std. verify time (ns):\t\t" << stddev_verify_time << std::endl;
-	outfile.close();
+    record_results(average_sign_time,
+                   average_verify_time,
+                   stddev_sign_time,
+                   stddev_verify_time,
+                   "xmss_results.txt");
 
 	sign_times.clear();
 	verify_times.clear();
