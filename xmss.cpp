@@ -10,32 +10,9 @@
 #include <numeric>
 #include <cmath>
 
+#include "util.h"
+
 #define ITERATIONS 1000
-
-std::vector<int64_t> sign_times;
-std::vector<int64_t> verify_times;
-
-void get_average_sign_time(unsigned long long &average_sign_time) {
-
-	uint64_t total = 0;
-
-	for(int64_t i : sign_times)
-		total += i;
-
-	average_sign_time = total / sign_times.size();
-
-}
-
-void get_average_verify_time(unsigned long long &average_verify_time) {
-
-	uint64_t total = 0;
-
-	for(int64_t i : verify_times)
-		total += i;
-
-	average_verify_time = total / verify_times.size();
-
-}
 
 void get_stddev_sign(unsigned long long &stddev_sign_time) {
 	double sum = std::accumulate(sign_times.begin(), sign_times.end(), 0.0);
@@ -70,7 +47,7 @@ int sign_and_verify() {
    std::vector<uint8_t> sig = signer.signature(rng);
    
    auto stop = std::chrono::high_resolution_clock::now();
-   sign_times.push_back(std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count());
+   sign_times.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
 
    // create Public Key Verifier using the public key
    Botan::PK_Verifier verifier(public_key, "");
@@ -81,7 +58,7 @@ int sign_and_verify() {
    if(verifier.check_signature(sig.data(), sig.size())) {
       std::cout << "Success." << std::endl;
       stop = std::chrono::high_resolution_clock::now();
-      verify_times.push_back(std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count());
+      verify_times.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
       return 0;
    } else {
       std::cout << "Error." << std::endl;
@@ -91,29 +68,31 @@ int sign_and_verify() {
 
 int main() {
 	unsigned long long average_sign_time, average_verify_time, stddev_sign_time, stddev_verify_time;	
-	for(int i = 0; i < ITERATIONS; i++) {
+
+    for(int i = 0; i < ITERATIONS; i++) {
 		std::cout << "i=" << i << "\t";
 		sign_and_verify();
 	}
-	get_average_sign_time(average_sign_time);
-	get_average_verify_time(average_verify_time);
+
+	get_average_sign_time(average_sign_time, sign_times);
+	get_average_verify_time(average_verify_time, verify_times);
 	get_stddev_sign(stddev_sign_time);
 	get_stddev_verify(stddev_verify_time);
 	
-	std::cout << "Average sign time (us):\t\t" << average_sign_time << std::endl;
-	std::cout << "Std. sign time (us):\t\t" << stddev_sign_time << std::endl << std::endl;
+	std::cout << "Average sign time (ns):\t\t" << average_sign_time << std::endl;
+	std::cout << "Std. sign time (ns):\t\t" << stddev_sign_time << std::endl << std::endl;
 	
-	std::cout << "Average verify time (us):\t" << average_verify_time << std::endl;
-	std::cout << "Std. verify time (us):\t\t" << stddev_verify_time << std::endl;
+	std::cout << "Average verify time (ns):\t" << average_verify_time << std::endl;
+	std::cout << "Std. verify time (ns):\t\t" << stddev_verify_time << std::endl;
 
 	
 	std::ofstream outfile;
 	outfile.open("xmss_results.txt");
-	outfile << "Average sign time (us):\t\t" << average_sign_time << std::endl;
-	outfile << "Std. sign time (us):\t\t" << stddev_sign_time << std::endl << std::endl;
+	outfile << "Average sign time (ns):\t\t" << average_sign_time << std::endl;
+	outfile << "Std. sign time (ns):\t\t" << stddev_sign_time << std::endl << std::endl;
 	
-	outfile << "Average verify time (us):\t" << average_verify_time << std::endl;
-	outfile << "Std. verify time (us):\t\t" << stddev_verify_time << std::endl;
+	outfile << "Average verify time (ns):\t" << average_verify_time << std::endl;
+	outfile << "Std. verify time (ns):\t\t" << stddev_verify_time << std::endl;
 	outfile.close();
 
 	sign_times.clear();

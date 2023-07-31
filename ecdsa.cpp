@@ -11,33 +11,9 @@
 #include <numeric>
 #include <cmath>
 
+#include "util.h"
+
 #define ITERATIONS 1000
-
-
-std::vector<int64_t> sign_times;
-std::vector<int64_t> verify_times;
-
-void get_average_sign_time(unsigned long long &average_sign_time) {
-
-	uint64_t total = 0;
-
-	for(int64_t i : sign_times)
-		total += i;
-
-	average_sign_time = total / sign_times.size();
-
-}
-
-void get_average_verify_time(unsigned long long &average_verify_time) {
-
-	uint64_t total = 0;
-
-	for(int64_t i : verify_times)
-		total += i;
-
-	average_verify_time = total / verify_times.size();
-
-}
 
 void get_stddev_sign(unsigned long long &stddev_sign_time) {
 	double sum = std::accumulate(sign_times.begin(), sign_times.end(), 0.0);
@@ -92,8 +68,8 @@ int main() {
 		std::cout << "i=" << i << "\t";
 		sign_and_verify();
 	}
-	get_average_sign_time(average_sign_time);
-	get_average_verify_time(average_verify_time);
+	get_average_sign_time(average_sign_time, sign_times);
+	get_average_verify_time(average_verify_time, verify_times);
 	get_stddev_sign(stddev_sign_time);
 	get_stddev_verify(stddev_verify_time);
 	
