@@ -1,5 +1,7 @@
 all:
-	aarch64-linux-gnu-g++ timing.cpp -o timing -static -I/home/geoff/liboqs/build/include /home/geoff/liboqs/build/lib/liboqs.a
+	aarch64-linux-gnu-g++ -o xmss xmss.cpp -I/usr/local/include/botan-3/ -I/usr/local/include/botan-3/botan /home/geoff/botan/libbotan-3.a --std=c++20 -static
+	aarch64-linux-gnu-g++ -o ecdsa ecdsa.cpp -I/usr/local/include/botan-3/ -I/usr/local/include/botan-3/botan /home/geoff/botan/libbotan-3.a --std=c++20 -static
 
-clean: 
-	rm timing
+clean:
+	rm xmss
+	rm ecdsa
