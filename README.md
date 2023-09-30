@@ -83,4 +83,4 @@ Run the binaries:
 
     ./functional_test.bash
 
-Results will be displayed in the terminal and written to results per-algorithm results files (e.g., "ecdsa_results,txt").
+Results will be displayed in the terminal and written to per-algorithm results files (e.g., "ecdsa_results.txt").
