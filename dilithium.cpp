@@ -1,6 +1,3 @@
-//
-// Created by geoff on 7/31/23.
-//
 #include <botan/auto_rng.h>
 #include <botan/dilithium.h>
 #include <botan/pubkey.h>
@@ -14,14 +11,9 @@
 int sign_and_verify() {
 
     Botan::AutoSeeded_RNG rng;
-    // Generate Dilithium keypair
     auto priv_key = Botan::Dilithium_PrivateKey(rng, Botan::DilithiumMode(Botan::DilithiumMode::Dilithium4x4));
     const auto pub_key = priv_key.public_key();
 
-//    const std::string message("This is a tasty burger!");
-//    const std::vector<uint8_t> msgvec(message.data(), message.data() + message.size());
-
-    // sign data
     auto signer = Botan::PK_Signer(priv_key, rng, "Randomized");
 
     Botan::secure_vector<uint8_t> msg{0x01, 0x02, 0x03, 0x04};
@@ -33,7 +25,6 @@ int sign_and_verify() {
 
     sign_times.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
 
-    //******************************VERIFY**********************************
     Botan::PK_Verifier verifier(*pub_key, "");
 
     start = std::chrono::high_resolution_clock::now();

@@ -1,7 +1,3 @@
-//
-// Created by geoff on 7/31/23.
-//
-
 #include <cstdint>
 #include <vector>
 #include <numeric>

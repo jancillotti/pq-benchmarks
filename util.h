@@ -1,7 +1,3 @@
-//
-// Created by geoff on 7/31/23.
-//
-
 #ifndef PQ_BENCHMARKS_UTIL_H
 #define PQ_BENCHMARKS_UTIL_H
 

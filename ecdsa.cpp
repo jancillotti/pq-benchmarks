@@ -13,31 +13,26 @@
 int sign_and_verify() {
 
    Botan::AutoSeeded_RNG rng;
-   // Generate ECDSA keypair
    Botan::ECDSA_PrivateKey key(rng, Botan::EC_Group("secp521r1"));
 
    const std::string message("This is a tasty burger!");
 
-   // sign data
    Botan::PK_Signer signer(key, rng, "SHA-256");
 
    auto start = std::chrono::high_resolution_clock::now();
    signer.update(message);
    
-   
    std::vector<uint8_t> signature = signer.signature(rng);
-   //std::cout << "Signature:" << std::endl << Botan::hex_encode(signature);
    
    auto stop = std::chrono::high_resolution_clock::now();
    sign_times.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
 
-   //******************************VERIFY**********************************
    Botan::PK_Verifier verifier(key, "SHA-256");
-   
    
    start = std::chrono::high_resolution_clock::now();
    verifier.update(message);
    stop = std::chrono::high_resolution_clock::now();
+   
    std::cout << "is " << (verifier.check_signature(signature) ? "valid" : "invalid") << std::endl;
    verify_times.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(stop - start).count());
    return 0;
