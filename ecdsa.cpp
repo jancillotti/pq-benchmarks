@@ -10,8 +10,6 @@
 
 #include "util.h"
 
-#define ITERATIONS 1000
-
 int sign_and_verify() {
 
    Botan::AutoSeeded_RNG rng;

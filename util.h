@@ -8,6 +8,8 @@
 #include <vector>
 #include <cstdint>
 
+const int ITERATIONS = 10;
+
 std::vector<int64_t> sign_times;
 std::vector<int64_t> verify_times;
 

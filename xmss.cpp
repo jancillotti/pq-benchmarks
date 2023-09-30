@@ -9,8 +9,6 @@
 
 #include "util.h"
 
-#define ITERATIONS 1000
-
 int sign_and_verify() {
    // Create a random number generator used for key generation.
    Botan::AutoSeeded_RNG rng;
