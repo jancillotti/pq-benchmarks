@@ -24,3 +24,4 @@ clean:
 	@$(RM) dilithium-x86
 	@$(RM) sphincs-arm
 	@$(RM) sphincs-x86
+	@$(RM) *_results.txt
