@@ -78,3 +78,9 @@ Finally, clone the `pq-benchmarking` repository and build the test binaries for 
     git clone https://github.com/twardokus/pq-benchmarks.git
     cd $HOME/pq-benchmarks
     make all
+
+Run the binaries:
+
+    ./functional_test.bash
+
+Results will be displayed in the terminal and written to results per-algorithm results files (e.g., "ecdsa_results,txt").
