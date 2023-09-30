@@ -20,3 +20,7 @@ clean:
 	@$(RM)  ecdsa-x86
 	@$(RM) falcon-arm
 	@$(RM) falcon-x86
+	@$(RM) dilithium-arm
+	@$(RM) dilithium-x86
+	@$(RM) sphincs-arm
+	@$(RM) sphincs-x86
