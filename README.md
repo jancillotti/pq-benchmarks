@@ -7,11 +7,12 @@ Create a fresh virtual machine with Ubuntu 22.04 (VirtualBox is recommended for 
     sudo apt update
     sudo apt upgrade -y
 
-Next, install several dependencies that are required to build the various cryptographic packages and cross-compile test programs for the ARM architecture:
+Next, install several dependencies:
 
-    sudo apt install -y g++-aarch64-linux-gnu
+    sudo apt install -y g++-aarch64-linux-gnu astyle cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind
 
-Once this is done, proceed with installing the Botan library. First, obtain the Botan source code from GitHub:
+## Installing Botan
+First, obtain the Botan source code from GitHub:
     
     cd $HOME
     git clone https://github.com/randombit/botan.git
@@ -36,22 +37,44 @@ Now, compile Botan for x86_64 (you will need to clone the Botan source repositor
     make
     make install
 
-Finally, return to the `pq-benchmarking` repository and build the test binaries for both x86 and ARM (note that either architecture can be build alone with individual make rules. Check the included Makefile for details):
+## Installing liboqs
 
-    cd $HOME/pq-benchmarking
-    make all
+Start by creating placeholder directories for the ARM and x86 installations of liboqs:
 
+    mkdir liboqs-aarch64 liboqs-x86
 
+Now, obtain the liboqs source code from GitHub:
 
-Installing OQS:
+    cd $HOME
+    git clone -b main https://github.com/open-quantum-safe/liboqs.git
 
-    cd ~
-    git clone https://github.com/open-quantum-safe/liboqs.git
-    cd liboqs
+Next, build liboqs for ARM:
+
+    cd $HOME
+    mv liboqs liboqs-arm 
+    cd liboqs-arm
     mkdir build && cd build
-    cmake -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr/local/ ..
-    make
-    sudo make install
-    sudo ldconfig
+    cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=$HOME/pq-benchmarks/arm-toolchain.cmake -DOQS_USE_OPENSSL=OFF -DCMAKE_INSTALL_PREFIX=$HOME/liboqs-aarch64 ..
+    ninja
+    ninja install
 
-...
+Now, build liboqs for x86_64:
+
+    cd $HOME
+    git clone -b main https://github.com/open-quantum-safe/liboqs.git
+    mv liboqs liboqs-intel
+    cd liboqs-intel
+    mkdir build && cd build
+    cmake -GNinja -DOQS_USE_OPENSSL=OFF -DCMAKE_INSTALL_PREFIX=$HOME/liboqs-x86 ..
+    ninja
+    ninja install
+
+
+## Building and running benchmarking code
+
+
+Finally, clone the `pq-benchmarking` repository and build the test binaries for both x86 and ARM (note that either architecture can be build alone with individual make rules. Check the included Makefile for details):
+
+    git clone https://github.com/twardokus/pq-benchmarks.git
+    cd $HOME/pq-benchmarks
+    make all
