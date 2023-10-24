@@ -1,6 +1,24 @@
 # PQ-Benchmarking
 *These instructions are valid for Ubuntu 22.04 and the most recent versions of Botan and liboqs as of September 29, 2023*
 
+This repository is made available as part of an artifact submission to the 2024 Network and Distributed 
+System Security Symposium (NDSS), associated with the following paper:
+
+Geoff Twardokus, Nina Bindel, Hanif Rahbari, and Sarah McCarthy, "When Cryptography Needs a Hand: Practical Post-Quantum Authentication for V2V Communications," _Network and Distributed System Security Symposium (NDSS 2024)_, San Diego, CA, Feb. 2024.
+
+Bibtex:
+
+    @inproceedings{twardokus2024when,
+        author = "Geoff Twardokus and Nina Bindel and Hanif Rahbari and Sarah McCarthy",
+        title = "When Cryptography Needs a Hand: Practical Post-Quantum Authentication for {V2V} Communications",
+        booktitle = "Proc. Network and Distributed System Security Symposium (NDSS)",
+        month = feb,
+        year = "2024",
+        address = "San Diego, CA",
+        pages = ""
+    }
+
+
 ## Setup
 Create a fresh virtual machine with Ubuntu 22.04 (VirtualBox is recommended for a free hypervisor). After installation, be sure to update all packages to their latest versions:
 
