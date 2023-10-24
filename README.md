@@ -51,7 +51,7 @@ Now, compile Botan for x86_64 (you will need to clone the Botan source repositor
     mv botan botan-x86
     mkdir botan-intel
     cd botan-intel
-    ./configure.py --os=linux --cpu=x86_64 --cc-bin=$(which g++) --cc=gcc --prefix=$HOME/botan-intel/
+    ./configure.py --os=linux --cpu=x86_64 --cc-bin=$(which g++) --cc=gcc --prefix=$HOME/botan-x86/
     make
     make install
 
