@@ -29,6 +29,11 @@ Next, install several dependencies:
 
     sudo apt install -y g++-aarch64-linux-gnu astyle cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz python3-yaml valgrind
 
+Clone the `pq-benchmarks` repository.
+
+    cd $HOME
+    git clone https://github.com/twardokus/pq-benchmarks.git
+
 ## Installing Botan
 First, obtain the Botan source code from GitHub:
     
@@ -91,9 +96,8 @@ Now, build liboqs for x86_64:
 ## Building and running benchmarking code
 
 
-Finally, clone the `pq-benchmarking` repository and build the test binaries for both x86 and ARM (note that either architecture can be build alone with individual make rules. Check the included Makefile for details):
+Finally, move to the cloned `pq-benchmarking` repository and build the test binaries for both x86 and ARM (note that either architecture can be build alone with individual make rules. Check the included Makefile for details):
 
-    git clone https://github.com/twardokus/pq-benchmarks.git
     cd $HOME/pq-benchmarks
     make all
 
