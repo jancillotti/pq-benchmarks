@@ -23,6 +23,18 @@ This repository consists of multiple source code (C++) files, a Makefile to be u
 source files, and a test script (`functional_test.bash`) that builds the project binaries for the x86 architecture and 
 executes them for evaluation purposes on a typical x86-based PC.
 
+## Evaluation Requirements and Supported Environments
+
+### Hardware
+No hardware is required beyond a "commodity PC." As defined by the
+[NDSS 2024 Call for Artifacts](https://web.archive.org/web/20230930035437/https://secartifacts.github.io/ndss2024/call),
+"[a] commodity desktop machine is defined as one with an x86-64 CPU with 8 cores and 16 GB of RAM running a recent Linux
+or Windows operating system."
+
+### Software
+An Ubuntu 22.04 virtual machine containing the pre-configured artifact is available from [](). This virtual machine was
+created and evaluated using Virtualbox version 7.0.8 r156879 (Qt5.15.2), which is freely available from Oracle at
+https://www.virtualbox.org. We recommend users and evaluators use the same version to ensure consistency.
 ## Setup
 Create a fresh virtual machine with Ubuntu 22.04 (VirtualBox is recommended for a free hypervisor). After installation, be sure to update all packages to their latest versions:
 
