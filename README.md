@@ -18,6 +18,10 @@ Bibtex:
         pages = ""
     }
 
+## Repository Structure
+This repository consists of multiple source code (C++) files, a Makefile to be used for building the project from those
+source files, and a test script (`functional_test.bash`) that builds the project binaries for the x86 architecture and 
+executes them for evaluation purposes on a typical x86-based PC.
 
 ## Setup
 Create a fresh virtual machine with Ubuntu 22.04 (VirtualBox is recommended for a free hypervisor). After installation, be sure to update all packages to their latest versions:
