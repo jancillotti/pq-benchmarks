@@ -1,5 +1,6 @@
 # PQ-Benchmarking
-*These instructions are valid for Ubuntu 22.04 and the most recent versions of Botan and liboqs as of September 29, 2023*
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10158032.svg)](https://doi.org/10.5281/zenodo.10158032)
 
 This repository is made available as part of an artifact submission to the 2024 Network and Distributed 
 System Security Symposium (NDSS), associated with the following paper:
@@ -23,7 +24,37 @@ This repository consists of multiple source code (C++) files, a Makefile to be u
 source files, and a test script (`functional_test.bash`) that builds the project binaries for the x86 architecture and 
 executes them for evaluation purposes on a typical x86-based PC.
 
+## Minimum Working Example
+An Ubuntu 22.04 virtual machine that is pre-configured to compile and run the artifact is archived in OVA format
+at [doi:10.5281/zenodo.10160535](https://doi.org/10.5281/zenodo.10160535). This virtual machine was
+created and evaluated using Virtualbox version 7.0.8 r156879 (Qt5.15.2), which is freely available from Oracle at
+https://www.virtualbox.org. We recommend users and evaluators use the same version to ensure consistency.
+
 ## Evaluation Requirements and Supported Environments
+
+### Supported operating system
+Ubuntu 22.04 is the only supported operating system.
+
+### Software Dependencies
+Libraries that can be installed through the Ubuntu package manager:
+- g++-aarch64-linux-gnu 
+- astyle cmake 
+- gcc 
+- ninja-build 
+- libssl-dev 
+- python3-pytest 
+- python3-pytest-xdist 
+- unzip 
+- xsltproc 
+- doxygen 
+- graphviz 
+- python3-yaml 
+- valgrind
+
+Libraries that need to be built from source (using the below instructions - validated for most recent versions 
+of these libraries as of September 2023):
+- Botan, a C++ cryptographic library (https://github.com/randombit/botan.git)
+- liboqs, a post-quantum algorithm library from Open Quantum Safe (https://github.com/open-quantum-safe/liboqs.git)
 
 ### Hardware
 No hardware is required beyond a "commodity PC." As defined by the
@@ -31,10 +62,6 @@ No hardware is required beyond a "commodity PC." As defined by the
 "[a] commodity desktop machine is defined as one with an x86-64 CPU with 8 cores and 16 GB of RAM running a recent Linux
 or Windows operating system."
 
-### Software
-An Ubuntu 22.04 virtual machine containing the pre-configured artifact is available from [](). This virtual machine was
-created and evaluated using Virtualbox version 7.0.8 r156879 (Qt5.15.2), which is freely available from Oracle at
-https://www.virtualbox.org. We recommend users and evaluators use the same version to ensure consistency.
 ## Setup
 Create a fresh virtual machine with Ubuntu 22.04 (VirtualBox is recommended for a free hypervisor). After installation, be sure to update all packages to their latest versions:
 
