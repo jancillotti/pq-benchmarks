@@ -37,19 +37,20 @@ Ubuntu 22.04 is the only supported operating system.
 
 ### Software Dependencies
 Libraries that can be installed through the Ubuntu package manager:
-- g++-aarch64-linux-gnu 
-- astyle cmake 
-- gcc 
-- ninja-build 
-- libssl-dev 
-- python3-pytest 
-- python3-pytest-xdist 
-- unzip 
-- xsltproc 
-- doxygen 
-- graphviz 
-- python3-yaml 
+- astyle
+- cmake
+- doxygen
+- g++-aarch64-linux-gnu  
+- gcc
+- graphviz
+- libssl-dev
+- ninja-build
+- python3-pytest
+- python3-pytest-xdist
+- python3-yaml
+- unzip
 - valgrind
+- xsltproc
 
 Libraries that need to be built from source (using the below instructions - validated for most recent versions 
 of these libraries as of September 2023):
