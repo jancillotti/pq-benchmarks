@@ -1,6 +1,6 @@
 # PQ-Benchmarking
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10158032.svg)](https://doi.org/10.5281/zenodo.10158032)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10158025.svg)](https://doi.org/10.5281/zenodo.10158025)
 
 This repository is made available as part of an artifact submission to the 2024 Network and Distributed 
 System Security Symposium (NDSS), associated with the following paper:
